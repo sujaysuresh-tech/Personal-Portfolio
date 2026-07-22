@@ -751,13 +751,39 @@ function Contact() {
     setTimeout(() => setCopied(false), 1800);
   };
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio contact — ${form.name || "Hello"}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    setSent(true);
-  };
+const [sending, setSending] = useState(false);
+const [error, setError] = useState(false);
+
+const submit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setSending(true);
+  setError(false);
+
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: "df06fa71-34f7-4537-b5fe-c4eada956d00",
+        name: form.name,
+        email: form.email,
+        message: form.message,
+        subject: `Portfolio contact — ${form.name || "Hello"}`,
+      }),
+    });
+    const result = await res.json();
+    if (result.success) {
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+    } else {
+      setError(true);
+    }
+  } catch {
+    setError(true);
+  } finally {
+    setSending(false);
+  }
+};
 
   return (
     <section id="contact" className="relative px-6 py-32">
@@ -854,10 +880,11 @@ function Contact() {
               </div>
               <button
                 type="submit"
-                className="mt-2 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-white/90"
+                disabled={sending}
+                className="mt-2 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-white/90 disabled:opacity-60"
               >
                 {sent ? <Check className="h-4 w-4" /> : <Send className="h-4 w-4" />}
-                {sent ? "Message sent" : "Send message"}
+                {sending ? "Sending..." : sent ? "Message sent" : error ? "Failed — try again" : "Send message"}
               </button>
             </form>
           </Reveal>
