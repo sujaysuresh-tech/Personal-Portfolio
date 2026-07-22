@@ -254,7 +254,7 @@ function Hero() {
           <div className="relative">
             <div className="absolute -inset-8 rounded-full bg-[radial-gradient(circle,#7c3aed_0%,transparent_60%)] opacity-40 blur-2xl" />
             
-            <div className="glass-strong relative h-[280px] w-[280px] overflow-hidden rounded-full sm:h-[340px] sm:w-[340px]">
+            <div className="relative h-[280px] w-[280px] overflow-hidden rounded-2xl sm:h-[340px] sm:w-[340px]">
               <img
                 src={profileImg}
                 alt="Sujay Suresh"
@@ -262,7 +262,6 @@ function Hero() {
                 height={800}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10" />
             </div>
           </div>
 
