@@ -25,7 +25,7 @@ import {
 import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
 import { MagneticButton } from "@/components/portfolio/MagneticButton";
 import { Reveal, stagger, staggerItem } from "@/components/portfolio/Reveal";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.png";
 
 import lumenImg from "@/assets/lumen.png";
 
