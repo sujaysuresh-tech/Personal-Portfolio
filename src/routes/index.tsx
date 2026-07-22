@@ -25,12 +25,13 @@ import {
 import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
 import { MagneticButton } from "@/components/portfolio/MagneticButton";
 import { Reveal, stagger, staggerItem } from "@/components/portfolio/Reveal";
-import profileAsset from "@/assets/profile.jpg.asset.json";
-const profileImg = profileAsset.url;
-import lumenImage from "@/assets/lumen.png.asset.json";
-import fraudImage from "@/assets/fraud-detection.png.asset.json";
-import resumeAsset from "@/assets/Sujay_Suresh_Resume.pdf.asset.json";
-const resumeUrl = resumeAsset.url;
+import profileImg from "@/assets/profile.jpg";
+
+import lumenImg from "@/assets/lumen.png";
+
+import fraudImg from "@/assets/fraud-detection.png";
+
+const resumeUrl = "/Sujay_Suresh_Resume.pdf";
 
 
 export const Route = createFileRoute("/")({
@@ -531,7 +532,7 @@ const PROJECTS: Project[] = [
       "Deployed on Vercel, with documentation grounded in the live repo structure.",
     ],
     accent: "from-violet-500/20 to-fuchsia-500/10",
-    image: lumenImage.url,
+    image: lumenImg,
 
   },
   {
@@ -548,7 +549,7 @@ const PROJECTS: Project[] = [
       "Certificates are recorded and validated on-chain, removing reliance on a single trusted authority for verification.",
     ],
     accent: "from-blue-500/20 to-cyan-500/10",
-    image: fraudImage.url,
+    image: fraudImg,
   },
 ];
 
