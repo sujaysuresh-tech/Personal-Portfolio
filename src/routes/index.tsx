@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import {
   Github,
   Linkedin,
@@ -24,7 +24,6 @@ import {
 
 import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
 import { MagneticButton } from "@/components/portfolio/MagneticButton";
-import { CubeCluster } from "@/components/portfolio/CubeCluster";
 import { Reveal, stagger, staggerItem } from "@/components/portfolio/Reveal";
 import profileImg from "@/assets/profile.png";
 
@@ -34,6 +33,11 @@ import fraudImg from "@/assets/fraud-detection.png";
 
 const resumeUrl = "/Sujay_Suresh_Resume.pdf";
 
+// Lazy-loaded so three.js/@react-three/fiber never execute during SSR,
+// which is what was causing the 500 error on the live site.
+const CubeCluster = lazy(() =>
+  import("@/components/portfolio/CubeCluster").then((m) => ({ default: m.CubeCluster })),
+);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -253,7 +257,9 @@ function Hero() {
           className="relative mx-auto"
         >
           <div className="relative">
-            <CubeCluster className="absolute -inset-16 -z-10" />
+            <Suspense fallback={null}>
+              <CubeCluster className="absolute -inset-16 -z-10" />
+            </Suspense>
             <div className="absolute -inset-8 rounded-full bg-[radial-gradient(circle,#7c3aed_0%,transparent_60%)] opacity-40 blur-2xl" />
             
             <div className="relative h-[280px] w-[280px] overflow-hidden rounded-full sm:h-[340px] sm:w-[340px]">
