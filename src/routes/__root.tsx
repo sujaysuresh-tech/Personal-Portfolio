@@ -78,7 +78,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#000000" },
-      { name: "google-site-verification", content: "rvLLZvPYqyGpfQ7io12ZcDZjeznotQkpWhpQD6ucVnA" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -88,6 +87,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Sujay Suresh",
+          jobTitle: "AI & Full Stack Developer",
+          url: "https://sujay-suresh-portfolio.vercel.app/",
+          sameAs: [
+            "https://github.com/sujaysuresh-tech",
+            "https://www.linkedin.com/in/sujay--suresh/",
+          ],
+          knowsAbout: [
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Full Stack Development",
+            "Python",
+            "JavaScript",
+          ],
+        }),
       },
     ],
   }),
