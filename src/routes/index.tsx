@@ -253,6 +253,7 @@ function Hero() {
           className="relative mx-auto"
         >
           <div className="relative">
+            <CubeCluster className="absolute -inset-16 -z-10" />
             <div className="absolute -inset-8 rounded-full bg-[radial-gradient(circle,#7c3aed_0%,transparent_60%)] opacity-40 blur-2xl" />
             
             <div className="relative h-[280px] w-[280px] overflow-hidden rounded-full sm:h-[340px] sm:w-[340px]">
