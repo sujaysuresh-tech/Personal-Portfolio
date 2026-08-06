@@ -12,4 +12,13 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    ssr: {
+      // Keep these out of the server bundle entirely. They're browser-only
+      // (WebGL/three.js) and crash on import in Node — the SSR build was
+      // still statically pulling them in and eagerly evaluating them even
+      // though they're only ever dynamically imported client-side.
+      external: ["three", "@react-three/fiber", "@react-three/drei"],
+    },
+  },
 });
